@@ -1,0 +1,7 @@
+class Solution(object):
+    def removeDuplicates(self, nums):
+        i = len(nums)-1
+        while i > 0:
+            if i < len(nums) and nums[i] == nums[i-1]: nums.pop(i)
+            else: i -= 1
+        return len(nums)
