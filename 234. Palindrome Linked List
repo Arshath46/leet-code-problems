@@ -1,0 +1,36 @@
+int *gen_arr(struct ListNode *h, int *count, int i)
+{
+	// termination
+	if (!h)
+	{
+		int *arr = (int *)malloc(*count * sizeof(int));
+		return arr;
+	};
+	// recursion
+	*count += 1;
+	int *arr = gen_arr(h->next, count, i + 1);
+	// body
+	arr[*count - 1 - i] = h->val;
+	return arr;
+}
+
+// Tail Recursion concept
+// matching the reversed array with linked list
+bool check(struct ListNode *h, int *arr, int n, int i)
+{
+	// termination
+	if (i == n)
+		return true;
+	// body
+	if (h->val != arr[i])
+		return false;
+	// recursion
+	return check(h->next, arr, n, i + 1);
+}
+
+bool isPalindrome(struct ListNode *head)
+{
+	int N = 0; // arr length
+	int *arr = gen_arr(head, &N, 0);
+	return check(head, arr, N, 0);
+}
